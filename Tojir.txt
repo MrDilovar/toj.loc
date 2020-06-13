@@ -1,0 +1,44 @@
+****************************************
+Categories
+
+categoryId {
+    categoryId
+}
+
+filterModel {
+	filter {
+	    id,
+		name,
+		slug,
+		values {
+			id,
+			value
+		}
+	}
+}
+[
+    [
+        1,
+        'test',
+        'test',
+        values: [
+            [
+                '1',
+                '123'
+            ],
+            [
+                '2',
+                'dwqd123'
+            ]
+        ]
+    ]
+]
+
+defaultOpened {
+    filter {
+        id,
+        values {
+            id
+        }
+    }
+}
