@@ -17,7 +17,9 @@
             </div>
             <div>
                 @foreach(json_decode($product->options, true) as $option)
-                    {{ $option['attr']['name'] }}: {{ $option['value']['value'] }}
+                    {{ $option['property']['name'] }}: {{ $option['value']['value'] }}
+                    <br>
+                    {{ $option['property']['slug'] }}: {{ $option['value']['id'] }}
                     <br>
                 @endforeach
             </div>

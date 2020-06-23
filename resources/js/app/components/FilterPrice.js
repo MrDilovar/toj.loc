@@ -13,6 +13,7 @@ const FilterPrice = (props) => {
                         <label aria-label="Цена от" htmlFor="priceFrom">от</label>
                         <input onChange={props.priceHandler.bind(this, 'priceFrom')}
                                className="form-control form-control-sm"
+                               defaultValue={0}
                                id="priceFrom" type="text" />
                     </div>
                     <div className="col">

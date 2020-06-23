@@ -28,10 +28,13 @@ class CategoryController extends Controller
             array_push($array_breadcrumb, ['title'=>$category->name, 'href'=>$slug]);
         }
 
-        $products = (new FilterModel($category))->get_index()->get();
+        $filter_model = (new FilterModel($category));
+        $products = $filter_model->get_index();
+        $open_properties = $filter_model->get_open_properties();
 
         return view('guest.categories', [
             'category'=>$category,
+            'open_properties'=>$open_properties,
             'products'=>$products,
             'array_breadcrumb'=>$array_breadcrumb,
             'sort'=>request()->sort,
@@ -50,6 +53,6 @@ class CategoryController extends Controller
 
         $filter_model = (new FilterModel($category));
 
-        return json_encode(["count"=>$filter_model->get_count(), "href"=>"123"]);
+        return json_encode(["count"=>$filter_model->get_count(), "href"=>$filter_model->get_route()]);
     }
 }

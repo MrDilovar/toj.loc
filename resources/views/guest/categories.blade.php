@@ -42,7 +42,7 @@
                 <div id="filterPanelLeft"
                      data-category-id="{{ $category->id }}"
                      data-filter-model="{{ $category->get_properties_with_values() }}"
-                     data-default-opened="">
+                     data-open-filters="{{ $open_properties }}">
                 </div>
             </div>
             <div class="col-md-9">
