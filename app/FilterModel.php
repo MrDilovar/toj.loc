@@ -2,7 +2,6 @@
 
 
 namespace App;
-use App\Product;
 
 class FilterModel
 {
@@ -93,25 +92,21 @@ class FilterModel
 
             if ($this->has_param($paramName)) {
                 $this->open_properties[$paramName] = $this->params[$paramName];
-                $string_value = $this->filter_param_value($this->params[$paramName]);
-                $this->query
-                    ->whereRaw("(JSON_CONTAINS(options->'$[*].value.property_id', '" . $property->id . "')")
-                    ->whereRaw("JSON_OVERLAPS(options->'$[*].value.id', JSON_ARRAY(" . $string_value . ")))");
+                $json_value = $this->filter_param_value($property->id, $this->params[$paramName]);
+                $this->query->whereRaw('JSON_OVERLAPS(JSON_KEYS(options) , \'' . $json_value . '\')');
             }
         }
-
-        dump($this->query->toSql());
     }
-//if ($attr_filter->id === $query_filter_id) {
-//$sql->whereRaw("(JSON_CONTAINS(options->'$[*].attr.id', '" . $query_filter_id . "')")
-//->whereRaw("JSON_OVERLAPS(options->'$[*].value.id', JSON_ARRAY(" . $query_filter_values . ")))");
-//}
 
-    private function filter_param_value($value)
+    private function filter_param_value($filter_id, $value)
     {
-        return implode(',', array_filter(
-                array_map('intval', explode(';', $value)),
-                function ($v) { return $v > 0;}
+        return json_encode(
+            array_map(
+                function ($v) use ($filter_id) { return 'p' . $filter_id . 'v' . $v; },
+                array_filter(
+                    array_map('intval', explode(';', $value)),
+                    function ($v) { return $v > 0; }
+                )
             )
         );
     }

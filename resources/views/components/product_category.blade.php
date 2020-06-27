@@ -16,12 +16,14 @@
                 <span>сом.</span>
             </div>
             <div>
-                @foreach(json_decode($product->options, true) as $option)
-                    {{ $option['property']['name'] }}: {{ $option['value']['value'] }}
-                    <br>
-                    {{ $option['property']['slug'] }}: {{ $option['value']['id'] }}
-                    <br>
-                @endforeach
+                @if(!is_null(json_decode($product->options, true)))
+                    @foreach(json_decode($product->options, true) as $option)
+                        {{ $option['property']['name'] }}: {{ $option['value']['value'] }}
+                        <br>
+                        {{ $option['property']['slug'] }}: {{ $option['value']['id'] }}
+                        <br>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>
