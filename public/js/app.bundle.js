@@ -48726,7 +48726,7 @@ var Filter = /*#__PURE__*/function (_React$Component) {
     };
     _this.params = {
       categoryId: _this.props.categoryId,
-      filters: props.openFilters
+      filters: {}
     };
     return _this;
   }
@@ -48846,41 +48846,27 @@ var Filter = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
-    key: "submit",
-    value: function submit() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "filter-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: this.state.href,
-        className: "btn btn-sm btn-primary"
-      }, "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C ", this.state.products, " \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u044F"));
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
 
-      var _this$validPrices = this.validPrices(this.props.openFilters),
-          _this$validPrices2 = _slicedToArray(_this$validPrices, 2),
-          openFilters = _this$validPrices2[0],
-          openFilterPrice = _this$validPrices2[1];
-
-      this.mapOpenFiltersLikeParam(openFilters);
-      console.log(openFilterPrice);
       var filterCategory = this.props.filterModel.map(function (filter) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FilterCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
           key: filter.id,
           filter: filter,
-          openFilters: _this3.params.filters,
           checkboxHandler: _this3.checkboxHandler.bind(_this3)
         });
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "c-filter-widget"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FilterPrice__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        openFilterPrice: openFilterPrice,
         priceHandler: this.priceHandler.bind(this)
-      }), filterCategory, this.submit());
+      }), filterCategory, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "filter-block"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: this.state.href,
+        className: "btn btn-sm btn-primary"
+      }, "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C ", this.state.products, " \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u044F")));
     }
   }]);
 
@@ -48919,62 +48905,32 @@ var _this = undefined;
 
 
 var FilterCategory = function FilterCategory(props) {
-  var selectorsBlock;
   var filter = props.filter;
-
-  if (props.openFilters.hasOwnProperty(filter.slug)) {
-    var checkedOption = filter.values.map(function (value) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        key: value.id,
-        className: "item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: filter.slug + value.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "text"
-      }, value.value), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "checkbox",
-        id: filter.slug + value.id,
-        onChange: props.checkboxHandler.bind(_this, filter.slug, value.id),
-        defaultChecked: props.openFilters[filter.slug].indexOf(value.id) >= 0
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "checkmark"
-      })));
-    });
-    selectorsBlock = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "selectors-block hide-block show",
-      style: {
-        display: 'block'
-      }
-    }, checkedOption);
-  } else {
-    var defaultOption = filter.values.map(function (value) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        key: value.id,
-        className: "item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: filter.slug + value.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "text"
-      }, value.value), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "checkbox",
-        id: filter.slug + value.id,
-        onChange: props.checkboxHandler.bind(_this, filter.slug, value.id)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "checkmark"
-      })));
-    });
-    selectorsBlock = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "selectors-block hide-block hide"
-    }, defaultOption);
-  }
-
+  var defaultOption = filter.values.map(function (value) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: value.id,
+      className: "item"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: filter.slug + value.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "text"
+    }, value.value), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "checkbox",
+      id: filter.slug + value.id,
+      onChange: props.checkboxHandler.bind(_this, filter.slug, value.id)
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "checkmark"
+    })));
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "filter-block"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "filter-title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, filter.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "ti-angle-right angle"
-  })), selectorsBlock);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "selectors-block hide-block hide"
+  }, defaultOption));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (FilterCategory);

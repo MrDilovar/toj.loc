@@ -26,6 +26,6 @@ const FilterPrice = (props) => {
             </div>
         </div>
     );
-}
+};
 
 export default FilterPrice;

@@ -1,44 +1,12 @@
 ****************************************
-Categories
+; Maximum allowed size for uploaded files.
+; http://php.net/upload-max-filesize
+upload_max_filesize = 2000M
 
-categoryId {
-    categoryId
-}
+; Maximum number of files that can be uploaded via a single request
+max_file_uploads = 10
 
-filterModel {
-	filter {
-	    id,
-		name,
-		slug,
-		values {
-			id,
-			value
-		}
-	}
-}
-[
-    [
-        1,
-        'test',
-        'test',
-        values: [
-            [
-                '1',
-                '123'
-            ],
-            [
-                '2',
-                'dwqd123'
-            ]
-        ]
-    ]
-]
+; http://php.net/post-max-size
+post_max_size = 800M
+****************************************
 
-defaultOpened {
-    filter {
-        id,
-        values {
-            id
-        }
-    }
-}

@@ -3,7 +3,7 @@
     <div class="container py-4">
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3 p-3 text-center">
-                <img style="max-height: 200px; max-width: 100%;" src="{{ $product->full_path_to_image() }}" alt="...">
+                <img style="max-height: 200px; max-width: 100%;" src="{{ $product->image_medium }}" alt="...">
             </div>
             <div class="col-sm-6 col-md-8 col-lg-9">
                 <h3>{{ $product->name }}</h3>

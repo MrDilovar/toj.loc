@@ -3,7 +3,7 @@
         <div class="product-item">
             <div class="pi-pic">
                 <a href="{{ route('guest.product', $product->id) }}">
-                    <img src="{{ $product->full_path_to_image() }}" alt="">
+                    <img src="{{ $product->image_medium }}" alt="">
                 </a>
             </div>
             <div class="product-title">

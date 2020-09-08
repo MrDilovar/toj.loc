@@ -12,9 +12,8 @@
 
     <link rel="stylesheet" type="text/css" href="/lib/normalize-8.0.1.css">
     <link rel="stylesheet" type="text/css" href="/lib/bootstrap-4.3.1.min.css">
-    <link rel="stylesheet" type="text/css" href="/open-iconic/font/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/lib/dropzone-5.7.0/dropzone.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/admin.css" >
+    <link rel="stylesheet" type="text/css" href="/lib/themify-icons/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="/css/store.css" >
 </head>
 <body>
     <!--[if lte IE 9]>
@@ -79,7 +78,7 @@
     <script src="/lib/jquery-3.4.1.min.js"></script>
     <script src="/lib/popper-1.14.6.min.js"></script>
     <script src="/lib/bootstrap-4.3.1.min.js"></script>
-    <script src="/lib/dropzone-5.7.0/dropzone.min.js"></script>
+    <script src="/lib/sortable-1.10.2.min.js"></script>
     <script src="/js/admin.js"></script>
 </body>
 </html>

@@ -11,11 +11,11 @@ class Filter extends React.Component{
         this.state = {
             products: 0,
             href: window.location.href
-        }
+        };
 
         this.params = {
             categoryId: this.props.categoryId,
-            filters: props.openFilters,
+            filters: {},
         }
     }
 
@@ -80,7 +80,7 @@ class Filter extends React.Component{
     }
 
     priceHandler(param, e) {
-        let value = parseInt(e.target.value)
+        let value = parseInt(e.target.value);
 
         if (isNaN(value)) {
             delete this.params[param];
@@ -111,31 +111,19 @@ class Filter extends React.Component{
         }
     }
 
-    submit () {
-        return (
-            <div className="filter-block">
-                <a href={this.state.href} className="btn btn-sm btn-primary">Показать {this.state.products} объявления</a>
-            </div>
-        );
-    }
-
     render() {
-        let [openFilters, openFilterPrice] = this.validPrices(this.props.openFilters);
-        this.mapOpenFiltersLikeParam(openFilters);
-
-        console.log(openFilterPrice);
-
         let filterCategory = this.props.filterModel.map((filter) => {
             return <FilterCategory key={filter.id} filter={filter}
-                                   openFilters={this.params.filters}
                                    checkboxHandler={this.checkboxHandler.bind(this)} />;
         });
 
         return (
             <div className="c-filter-widget">
-                <FilterPrice openFilterPrice={openFilterPrice} priceHandler={this.priceHandler.bind(this)} />
+                <FilterPrice priceHandler={this.priceHandler.bind(this)} />
                 {filterCategory}
-                {this.submit()}
+                <div className="filter-block">
+                    <a href={this.state.href} className="btn btn-sm btn-primary">Показать {this.state.products} объявления</a>
+                </div>
             </div>
         )
     }

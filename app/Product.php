@@ -25,13 +25,23 @@ class Product extends Model
         return $this->belongsToMany('App\Property')->withPivot('value');
     }
 
+    public function product_images()
+    {
+        return $this->hasMany('App\ProductImage');
+    }
+
     public function attribute_filter_values()
     {
         return $this->belongsToMany('App\AttributeFilterValue');
     }
 
-    public function full_path_to_image()
+    public function getImageMediumAttribute($value)
     {
-        return '/' . self::PATH_TO_IMAGE . $this->image;
+        return '/' . self::PATH_TO_IMAGE . $value;
+    }
+
+    public function getImageSmallAttribute($value)
+    {
+        return '/' . self::PATH_TO_IMAGE . $value;
     }
 }

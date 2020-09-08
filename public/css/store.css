@@ -1,0 +1,64 @@
+.fz-17{
+    font-size: 17px;
+}
+
+/* Product create */
+.pc-category-title{
+    cursor: pointer;
+    font-size: 17px;
+}
+.pc-category-title span{
+    margin-left: 4px;
+}
+.pc-category-title i{
+    font-size: 14px;
+}
+.pc-category-item{
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+.pc-category-item a{
+    text-decoration: none;
+    color: black;
+}
+.pc-category-item span{
+    margin-right: 8px;
+}
+.pc-category-item i{
+    margin-top: 2px;
+}
+
+/* Drop zone */
+#dzImage .dzImage-wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+#dzImage .item{
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+#dzImage .item-add{
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    border: 1px dashed #007bff;
+    border-radius: .2rem;
+    text-align: center;
+    font-size: 30px;
+    color: #007bff;
+    cursor: pointer;
+}
+#dzImage .item-preview img{
+    width: 90px;
+    height: 90px;
+    border-radius: .25rem;
+}
+#dzImage .item-delete{
+    cursor: pointer;
+}
+#dzImage .item-delete:hover{
+    text-decoration: underline;
+}

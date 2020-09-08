@@ -61,7 +61,8 @@ Route::group([
     Route::post('/profile', 'StoreController@profile_update')->name('profile.update');
     Route::post('/profile/logo', 'StoreController@profile_logo_update')->name('profile.logo.update');
     Route::post('/profile/password', 'StoreController@profile_password_update')->name('profile.password.update');
-    Route::resource('/product', 'ProductController');
+    Route::post('/product/upload-image', 'ProductController@upload_image')->name('product.upload_image');
+    Route::resource('/product', 'ProductController')->except('show');
     Route::resource('/order', 'OrderController');
 });
 

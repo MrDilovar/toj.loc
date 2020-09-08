@@ -27,7 +27,7 @@
                             @foreach (Cart::content() as $product)
                                 <tr>
                                     <td class="text-center">
-                                        <a href="{{ route('guest.product', $product->model->id) }}"><img height="100px" src="{{ $product->model->full_path_to_image() }}" alt="..."></a>
+                                        <a href="{{ route('guest.product', $product->model->id) }}"><img height="100px" src="{{ $product->model->image_medium }}" alt="..."></a>
                                     </td>
                                     <td><a class="text-dark" href="{{ route('guest.product', $product->model->id) }}">{{ $product->model->name }}</a></td>
                                     <td class="text-center">

@@ -9,7 +9,7 @@
                     <h3 class="mb-3">Заказ: #{{ $order->id }}</h3>
                 </div>
                 <div class="col-auto">
-                    <a href="{{ route('store.order.index') }}" class="btn btn-light border">Назад</a>
+                    <a href="{{ route('store.order.index') }}" class="btn btn-sm btn-outline-primary">Назад</a>
                 </div>
             </div>
 			<h4 class="my-3 font-weight-light">Заказчик</h4>

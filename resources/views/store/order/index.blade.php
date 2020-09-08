@@ -11,7 +11,7 @@
                             <input class="form-control form-control-sm" name="search" type="text" value="{{ request()->search }}" placeholder="ID заказа">
                         </div>
                         <div class="col-auto">
-                            <button class="btn btn-sm btn-primary"><span class="oi oi-magnifying-glass"></span></button>
+                            <button class="btn btn-sm btn-primary"><i class="ti-search"></i></button>
                         </div>
                     </div>
                 </form>
