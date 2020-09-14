@@ -37,7 +37,9 @@
                 <div class="col-6 col-md-4 col-lg-3 mb-4">
                     <div class="card h-100 text-center">
                         <div class="p-3">
-                            <a href="{{ route('guest.product', $product->id) }}"><img style="max-width: 150px; max-height: 150px;" src="{{ $product->image_medium }}" alt=""></a>
+                            <a href="{{ route('guest.product', $product->id) }}">
+                                <img style="max-width: 150px; max-height: 150px;" src="{{ $product->image_medium_url }}" alt="">
+                            </a>
                         </div>
                         <div class="mx-2">
                             <h6 class="card-title"><a class="text-dark" href="{{ route('guest.product', $product->id) }}">{{ $product->name }}</a></h6>

@@ -45,6 +45,8 @@ $(function () {
 });
 
 $(function () {
+    if (!document.getElementById('dzImage')) return;
+
     let dzImage = $('#dzImage'),
         itemAdd = $('#dzImage .item-add'),
         inputImagesBuffer = $('#dzImage #inputImagesBuffer'),

@@ -2,12 +2,12 @@
 
 namespace App;
 
+use App\Product;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductImage extends Model
 {
-    const PATH_TO_PRODUCT_IMAGES = 'img/products/images/';
-
     public $timestamps = false;
 
     protected $guarded = [];
@@ -17,13 +17,19 @@ class ProductImage extends Model
         return $this->belongsTo('App/Product');
     }
 
-    public function getImageMediumAttribute($value)
+    public function getImagesDeletePathAttribute()
     {
-        return '/' . self::PATH_TO_PRODUCT_IMAGES . $value;
+        return [Product::PATH_IMAGES_PRODUCTS . $this->image_medium, Product::PATH_IMAGES_PRODUCTS
+            . $this->image_small];
     }
 
-    public function getImageSmallAttribute($value)
+    public function getImageMediumUrlAttribute()
     {
-        return '/' . self::PATH_TO_PRODUCT_IMAGES . $value;
+        return Storage::disk('public')->url(Product::PATH_IMAGES_PRODUCTS . $this->image_medium);
+    }
+
+    public function getImageSmallUrlAttribute()
+    {
+        return Storage::disk('public')->url(Product::PATH_IMAGES_PRODUCTS . $this->image_small);
     }
 }

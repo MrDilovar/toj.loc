@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Store;
 use App\Http\Controllers\Controller;
 use App\Category;
 use App\Product;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
 use Mockery\Exception;
 
@@ -19,13 +22,13 @@ class ProductController extends Controller
 {
     private $pagination_limit = 4;
     private $path_images_uploads = 'images/uploads/';
-    private $path_images_products = 'images/products/';
     private $image_format = '.png';
+    private $path_images_products = Product::PATH_IMAGES_PRODUCTS;
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -49,8 +52,8 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\View\View
+     * @param Request $request
+     * @return View
      */
     public function create(Request $request)
     {
@@ -66,9 +69,9 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws FileNotFoundException
      */
     public function store(Request $request)
     {
@@ -119,7 +122,7 @@ class ProductController extends Controller
                 $property_value = $property->values()->find($request->properties[$property_name]);
 
                 if (!is_null($property_value)) {
-                    $product_properties['p' . $property->id . 'v' . $property_value->id] = [
+                    $product_properties[Product::getPropertyName($property->id, $property_value->id)] = [
                         'property' => $property,
                         'value' => $property_value,
                     ];
@@ -140,7 +143,7 @@ class ProductController extends Controller
             if ($request->has('images') && !is_null($images)) {
                 $imagesArray = [];
 
-                foreach (explode(',', $images) as $image_name) {
+                foreach (array_slice(explode(',', $images), 0, 5) as $image_name) {
                     if (Storage::disk('public')->exists($this->path_images_uploads .
                         $this->get_image_name($image_name, config('image.size.medium'))))
                         $imagesArray[] = $image_name;
@@ -186,7 +189,7 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return RedirectResponse|View
      */
     public function edit($id)
     {
@@ -203,9 +206,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -246,7 +249,7 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy($id)
     {
@@ -256,7 +259,12 @@ class ProductController extends Controller
             return redirect(route('store.product.index'))
                 ->with('success', 'У вас нет прав для выполнения данного действия!');
 
-        File::delete(Product::PATH_TO_IMAGE . $product->image);
+        foreach ($product->product_images as $image) {
+            Storage::disk('public')->delete($image->ImagesDeletePath);
+            $image->delete();
+        }
+
+        Storage::disk('public')->delete($product->ImagesDeletePath);
         $product->delete();
 
         return redirect(route('store.product.index'))->with('success', 'Продукт была успешно удалена!');

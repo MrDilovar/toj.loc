@@ -3,12 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
     protected $guarded = [];
 
-    const PATH_TO_IMAGE = 'img/products/';
+    const PATH_IMAGES_PRODUCTS = 'images/products/';
 
     public function user()
     {
@@ -35,13 +36,33 @@ class Product extends Model
         return $this->belongsToMany('App\AttributeFilterValue');
     }
 
-    public function getImageMediumAttribute($value)
-    {
-        return '/' . self::PATH_TO_IMAGE . $value;
+    public static function getPropertyName($property_id, $property_value_id) {
+        return 'p' . $property_id . 'v' . $property_value_id;
     }
 
-    public function getImageSmallAttribute($value)
+    public function getImagesDeletePathAttribute()
     {
-        return '/' . self::PATH_TO_IMAGE . $value;
+        return [Product::PATH_IMAGES_PRODUCTS . $this->image_medium, Product::PATH_IMAGES_PRODUCTS
+            . $this->image_small];
+    }
+
+    public function getImageMediumUrlAttribute()
+    {
+        return Storage::disk('public')->url(self::PATH_IMAGES_PRODUCTS . $this->image_medium);
+    }
+
+    public function getImageSmallUrlAttribute()
+    {
+        return Storage::disk('public')->url(self::PATH_IMAGES_PRODUCTS . $this->image_small);
+    }
+
+    public function getPropertiesAttribute($value)
+    {
+        return collect(json_decode($value));
+    }
+
+    public function getPropertyManualsAttribute($value)
+    {
+        return collect(json_decode($value));
     }
 }
